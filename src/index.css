@@ -3,8 +3,32 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  
+  margin: 0;
+  padding: 0;
   min-height: 100vh;
 overflow: hidden;
 }
 
+/* Base Window Layer */
+.cmd-window {
+  /* Using translate3d prevents layout recalculations */
+  transform: translate3d(-50%, -50%, 0) scale(1);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+/* Open State */
+.cmd-window {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Exit State: Symmetrical soft fade & subtle drop */
+.cmd-window.minimized {
+  /* Soft 15% scale-down with a slight downward dip toward dock */
+  transform: translate(-50%, calc(-50% + 40px)) scale(0.85);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}

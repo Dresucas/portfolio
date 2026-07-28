@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Crisp Inline SVG icons
 const Icons = {
   Terminal: () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -31,9 +30,19 @@ const Icons = {
   )
 };
 
-const Taskbar = () => {
+const Taskbar = ({ isCliMinimized, onToggleCli }) => {
   const socials = [
-    { id: 'terminal', label: 'CLI Terminal', icon: <Icons.Terminal />, href: '#', active: true, color: '#38edf8' },
+    { 
+      id: 'terminal', 
+      label: isCliMinimized ? 'Open CLI Terminal' : 'Minimize CLI Terminal', 
+      icon: <Icons.Terminal />, 
+      active: true, 
+      color: '#38edf8',
+      onClick: (e) => {
+        e.preventDefault();
+        onToggleCli();
+      }
+    },
     { id: 'github', label: 'GitHub', icon: <Icons.Github />, href: 'https://github.com/your-username', active: false, color: '#f8fafc' },
     { id: 'linkedin', label: 'LinkedIn', icon: <Icons.Linkedin />, href: 'https://linkedin.com/in/your-username', active: false, color: '#0a66c2' },
     { id: 'twitter', label: 'X / Twitter', icon: <Icons.Twitter />, href: 'https://x.com/your-username', active: false, color: '#ffffff' },
@@ -72,6 +81,7 @@ const Taskbar = () => {
           flex-direction: column;
           align-items: center;
           text-decoration: none;
+          cursor: pointer;
         }
 
         .icon-tile {
@@ -88,7 +98,6 @@ const Taskbar = () => {
           transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, border-color 0.2s, color 0.2s;
         }
 
-        /* Tooltip styled with Montserrat */
         .dock-tooltip {
           position: absolute;
           top: -42px;
@@ -107,7 +116,6 @@ const Taskbar = () => {
           transition: all 0.2s ease;
         }
 
-        /* Hover effect customized per brand color */
         .dock-item:hover .icon-tile {
           transform: scale(1.1) translateY(-8px);
           background: var(--brand-color);
@@ -119,38 +127,56 @@ const Taskbar = () => {
           opacity: 1;
           transform: translateY(0);
         }
+
+        .active-dot {
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          margin-top: 4px;
+          transition: opacity 0.3s;
+        }
+
+        .active-dot.is-active {
+          background-color: var(--brand-color);
+          box-shadow: 0 0 8px var(--brand-color);
+          animation: dot-blink 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes dot-blink {
+          0% {
+            opacity: 0.25;
+            box-shadow: 0 0 2px var(--brand-color);
+            transform: scale(0.85);
+          }
+          100% {
+            opacity: 1;
+            box-shadow: 0 0 10px var(--brand-color);
+            transform: scale(1.1);
+          }
+        }
       `}</style>
 
       <div className="cli-dock">
         {socials.map((item) => (
           <a
             key={item.id}
-            href={item.href}
-            target={item.href.startsWith('http') ? "_blank" : "_self"}
+            href={item.href || '#'}
+            onClick={item.onClick}
+            target={item.href && item.href.startsWith('http') ? "_blank" : "_self"}
             rel="noopener noreferrer"
             className="dock-item"
             style={{ '--brand-color': item.color }}
           >
-            {/* Tooltip Tag */}
             <div className="dock-tooltip">
               {item.label}
             </div>
 
-            {/* Icon Tile Box */}
             <div className="icon-tile">
               {item.icon}
             </div>
 
-            {/* Active Indicator Dot */}
             <span
-              style={{
-                width: '4px',
-                height: '4px',
-                borderRadius: '50%',
-                backgroundColor: item.active ? item.color : 'transparent',
-                marginTop: '4px',
-                boxShadow: item.active ? `0 0 8px ${item.color}` : 'none',
-              }}
+              className={`active-dot ${item.active && !isCliMinimized ? 'is-active' : ''}`}
             />
           </a>
         ))}

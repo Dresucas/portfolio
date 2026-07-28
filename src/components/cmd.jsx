@@ -63,14 +63,15 @@ const Cmd = () => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '50vw',
-        height: '70vh',
-        background: 'rgba(0, 0, 0, 0.39)',
+        width: '60vw',
+        height: '75vh',
+        background: 'rgba(0, 0, 0, 0.18)',
         borderRadius: '10px',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        fontFamily: "'Montserrat', monospace"
       }}
     >
       {/* Title Bar */}
@@ -101,7 +102,9 @@ const Cmd = () => {
               transform: 'translateX(-50%)',
               color: 'gray',
               fontSize: '13px',
-              whiteSpace: 'nowrap'
+              fontWeight: 500,
+              whiteSpace: 'nowrap',
+              fontFamily: "'Montserrat', sans-serif"
             }}
           >
             Developer Portfolio - Dresucas | 2026
@@ -116,23 +119,25 @@ const Cmd = () => {
           padding: '20px',
           overflowY: 'auto',
           textAlign: 'left',
-          fontFamily: 'monospace',
+          fontFamily: "'Montserrat', monospace",
           color: '#38edf8'
         }}
       >
         {/* Animated Heading */}
         <h1 style={{ 
           fontSize: '1rem', 
+          fontWeight: 600,
           margin: '0 0 10px 0', 
-          letterSpacing: '2px',
+          letterSpacing: '1px',
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
+          fontFamily: "'Montserrat', monospace"
         }}>
           {displayedText}
           {!headingFinished && (
             <span style={{
               display: 'inline-block',
-              width: '12px',
+              width: '10px',
               height: '1.2em',
               backgroundColor: '#38edf8',
               marginLeft: '8px'
@@ -146,13 +151,13 @@ const Cmd = () => {
             
             {/* Printed Output History */}
             {history.map((item, idx) => (
-              <div key={idx} style={{ marginBottom: '10px', fontSize: '1rem' }}>
+              <div key={idx} style={{ marginBottom: '10px', fontSize: '1rem', fontFamily: "'Montserrat', monospace" }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{ color: '#34d399', marginRight: '8px' }}>❯</span>
-                  <span>{item.command}</span>
+                  <span style={{ color: '#34d399', marginRight: '8px', fontWeight: 700 }}>❯</span>
+                  <span style={{ fontWeight: 500 }}>{item.command}</span>
                 </div>
                 {item.response && (
-                  <div style={{ color: '#94a3b8', whiteSpace: 'pre-wrap', marginTop: '4px', marginLeft: '16px' }}>
+                  <div style={{ color: '#94a3b8', whiteSpace: 'pre-wrap', marginTop: '4px', marginLeft: '16px', fontWeight: 400 }}>
                     {item.response}
                   </div>
                 )}
@@ -161,7 +166,7 @@ const Cmd = () => {
 
             {/* Active Input Line */}
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <span style={{ color: '#34d399', marginRight: '8px' }}>❯</span>
+              <span style={{ color: '#34d399', marginRight: '8px', fontWeight: 700 }}>❯</span>
               <input
                 type="text"
                 value={inputVal}
@@ -173,8 +178,9 @@ const Cmd = () => {
                   border: 'none',
                   outline: 'none',
                   color: '#38edf8',
-                  fontFamily: 'monospace',
+                  fontFamily: "'Montserrat', monospace",
                   fontSize: '1rem',
+                  fontWeight: 500,
                   width: '100%'
                 }}
               />

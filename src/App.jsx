@@ -4,7 +4,7 @@ function App(){
   return(
 <div
   style={{
-    height: '60vh',
+    height: '70vh',
     width: '50vw',
     borderRadius: '10px',
     background: 'rgba(0, 0, 0, 0.63)',

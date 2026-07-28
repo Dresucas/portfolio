@@ -7,8 +7,9 @@ function App(){
     height: '60vh',
     width: '50vw',
     borderRadius: '10px',
-    background: 'rgba(66, 66, 66, 0.54)',
-    backdropFilter:'blur(1px)',
+    background: 'rgba(0, 0, 0, 0.63)',
+    backdropFilter:'blur(5px)',
+    
 boxShadow: '0 40px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3)',
     padding: '10px',
     position: 'fixed',

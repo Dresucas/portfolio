@@ -1,16 +1,31 @@
 import { useState } from 'react';
 import Cmd from './components/cmd';
 import Taskbar from './components/taskbar';
+import Projects from './components/Projects';
+import DesktopIcons from './components/DesktopIcons';
 
 function App() {
   const [isMinimized, setIsMinimized] = useState(false);
+  const [showProjects, setShowProjects] = useState(false);
 
-  const toggleCmd = () => {
-    setIsMinimized((prev) => !prev);
+  const toggleCmd = () => setIsMinimized((prev) => !prev);
+  const handleOpenProjects = () => setShowProjects(true);
+  const handleCloseProjects = () => setShowProjects(false);
+
+  const handleOpenReadme = () => {
+    alert("Opening README.md...");
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
+      
+      {/* Desktop Icons on the wallpaper background */}
+      <DesktopIcons 
+        onOpenProjects={handleOpenProjects}
+        onOpenReadme={handleOpenReadme}
+      />
+
+      {/* Terminal / CMD Window */}
       <div
         className={`cmd-window ${isMinimized ? 'minimized' : ''}`}
         style={{
@@ -25,19 +40,20 @@ function App() {
           position: 'fixed',
           top: '50%',
           left: '50%',
-            transform: 'translate(-50%, -55%)',
+          transform: 'translate(-50%, -55%)',
           boxSizing: 'border-box',
-          
-          /* Anchor to center-bottom of window */
           transformOrigin: 'center bottom',
-          
-          /* Perfectly symmetrical 0.35s ease for both entry and exit */
-          transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s'
+          transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s',
+          zIndex: 10
         }}
       >
-        <Cmd />
+        <Cmd onOpenProjects={handleOpenProjects} />
       </div>
 
+      {/* Projects File Explorer Window */}
+      {showProjects && <Projects onClose={handleCloseProjects} />}
+
+      {/* Taskbar */}
       <Taskbar isCliMinimized={isMinimized} onToggleCli={toggleCmd} />
     </div>
   );

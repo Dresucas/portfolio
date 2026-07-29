@@ -1,0 +1,11 @@
+[
+  {
+    "id": "1",
+    "name": "Portfolio Terminal",
+    "description": "An interactive Mac-OS style web portfolio featuring a custom CLI and dynamic window manager.",
+    "imgUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80",
+    "tags": ["React", "JavaScript", "CSS3"],
+    "github": "https://github.com/your-username/portfolio",
+    "liveDemo": "https://your-portfolio.com"
+  }
+]

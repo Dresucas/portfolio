@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const Cmd = () => {
+const Cmd = ({ onOpenProjects }) => {
   // 1. Heading typing animation state
   const headingText = "portfolio@dresucas. Type `help` to list all commands.";
   const [displayedText, setDisplayedText] = useState('');
@@ -37,12 +37,15 @@ const Cmd = () => {
   // Handle keypresses for commands
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      const trimmed = inputVal.trim();
+      const trimmed = inputVal.trim().toLowerCase();
       let response = null;
 
-      if (trimmed.toLowerCase() === 'help') {
-        response = "Available commands:\n  help - Displays available commands\n  clear - Clears the terminal screen";
-      } else if (trimmed.toLowerCase() === 'clear') {
+      if (trimmed === 'help') {
+        response = "Available commands:\n  help - Displays available commands\n  projects - Opens the Projects File Explorer\n  clear - Clears the terminal screen";
+      } else if (trimmed === 'projects') {
+        if (onOpenProjects) onOpenProjects();
+        response = "Opening Projects Explorer...";
+      } else if (trimmed === 'clear') {
         setHistory([]);
         setInputVal('');
         return;

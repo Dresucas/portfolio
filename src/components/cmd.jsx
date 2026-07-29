@@ -65,7 +65,7 @@ const Cmd = () => {
         transform: 'translate(-50%, -50%)',
         width: '60vw',
         height: '75vh',
-        background: 'rgba(0, 0, 0, 0.18)',
+        background: 'rgba(0, 0, 0, 0.19)',
         borderRadius: '10px',
         display: 'flex',
         flexDirection: 'column',

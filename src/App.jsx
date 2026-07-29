@@ -18,7 +18,7 @@ function App() {
           width: '60vw',
           borderRadius: '12px',
           background: 'rgba(0, 0, 0, 0.45)',
-          backdropFilter: 'blur(12px)',
+          backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(12px)',
           boxShadow: '0 30px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset',
           padding: '10px',
